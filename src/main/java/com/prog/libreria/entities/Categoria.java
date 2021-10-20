@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name="categorias")
+@Builder
 @Setter
 @Getter
 @NoArgsConstructor

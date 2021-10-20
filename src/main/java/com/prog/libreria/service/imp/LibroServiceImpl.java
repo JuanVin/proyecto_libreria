@@ -1,9 +1,7 @@
 package com.prog.libreria.service.imp;
 
 import com.prog.libreria.commons.GenericServiceImpl;
-import com.prog.libreria.entities.Autor;
 import com.prog.libreria.entities.Libro;
-import com.prog.libreria.repository.AutorRepository;
 import com.prog.libreria.repository.LibroRepository;
 import com.prog.libreria.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,7 @@ public class LibroServiceImpl extends GenericServiceImpl<Libro, Long> implements
         }
     }
 
+    @Override
     @Transactional
     public List<Libro> findAllByActivo() throws Exception{
         try{
@@ -49,11 +48,13 @@ public class LibroServiceImpl extends GenericServiceImpl<Libro, Long> implements
         }
     }
 
+    @Override
     @Transactional
-    public List<Libro> findByIdAndActivo(long id) throws Exception{
+    public Libro findByIdAndActivo(long id) throws Exception{
         try{
-            List<Libro> entities = libroRepository.findByIDAndActivo(id);
-            return entities;
+            Optional<Libro> entity= libroRepository.findByIDAndActivo(id);
+
+            return entity.get();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

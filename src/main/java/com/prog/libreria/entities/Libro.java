@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="libros")
+@Builder
 @Setter
 @Getter
 @NoArgsConstructor
@@ -20,8 +21,10 @@ public class Libro {
     @Column
     private String rutaImg;
     @Column
-    private Short cantidad;
+    private Double precio;
     @Column
+    private Short cantidad;
+    @Column(length = 500)
     private String descripcion;
     @Column
     private Boolean oferta;
@@ -30,11 +33,11 @@ public class Libro {
     @Column
     private Boolean activo = true;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="fk_autor", nullable = false)
     private Autor autor;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="fk_categoria", nullable = false)
     private Categoria categoria;
 }
