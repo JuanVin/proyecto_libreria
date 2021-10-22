@@ -59,15 +59,6 @@ hr{
   opacity: 0.5;
 }
 
-.figcaption {
-  position: absolute;
-  bottom: 20px;
-  left: 15px;
-  right: 15px;
-  display:none;
-  transition: transform .5s;
-  z-index: 500;
-}
 /* Visible texto */
 .cont-img{
     position: relative;
@@ -82,16 +73,13 @@ hr{
     display:block;
     transition: all .5s;
 }
-.cont-img:hover img{
-    filter: blur(2px);
-}
-
 .fant-cat{
     position: relative;
 }
 
-.btn-fan{
+.fant-cat a{
     position: absolute;
+    width: 10%;
     bottom: 10px;
     right: 0;
 }

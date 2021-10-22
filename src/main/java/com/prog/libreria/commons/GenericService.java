@@ -23,5 +23,5 @@ public interface GenericService <T, ID extends Serializable> {
 
     T update (T entity, ID id) throws Exception;
 
-    boolean deleteById (long id) throws Exception;
+    boolean deleteById (Long id) throws Exception;
 }

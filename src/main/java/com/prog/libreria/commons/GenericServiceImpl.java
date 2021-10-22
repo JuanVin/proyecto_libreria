@@ -43,9 +43,11 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
     public T update(T entity, ID id) throws Exception {
         try{
             Optional<T> opt = getRepository().findById(id);
+
             if(!opt.isEmpty()){
-                entity = opt.get();
-                getRepository().save(entity);
+                T ent = opt.get();
+                ent = entity;
+                getRepository().save(ent);
             }else{
                 throw new Exception();
             }

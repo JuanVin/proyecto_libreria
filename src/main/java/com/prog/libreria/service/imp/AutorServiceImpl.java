@@ -19,7 +19,7 @@ public class AutorServiceImpl extends GenericServiceImpl<Autor, Long> implements
 
     @Override
     @Transactional
-    public boolean deleteById(long id) throws Exception {
+    public boolean deleteById(Long id) throws Exception {
        try {
            Optional<Autor> opt = getRepository().findById(id);
            if(!opt.isEmpty()){

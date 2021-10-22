@@ -13,5 +13,8 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     List<Libro> findAllByActivo();
 
     @Query(value="SELECT * FROM libros where libros.id= :id AND libros.activo=true", nativeQuery = true)
-    Optional<Libro> findByIDAndActivo(@Param("id") long id);
+    Optional<Libro> findByIDAndActivo(@Param("id") Long id);
+
+    @Query(value="SELECT * FROM libros where libros.activo=true AND libros.fk_categoria= :categoryId", nativeQuery = true)
+    List<Libro> findAllByCategoryAndActivo(@Param("categoryId") Long id);
 }

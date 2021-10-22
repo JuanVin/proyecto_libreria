@@ -38,8 +38,17 @@ html, body {
 .articulo img{
     width: 80%;
     height: auto;
+    max-height: 730px;
 }
 .shadow-img{
     -webkit-box-shadow: 2px 6px 15px 9px #5B5B5B;
     box-shadow: 2px 6px 15px 9px #5B5B5B;
+}
+.col-right{
+    position: relative;
+}
+.btn-add{
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }

@@ -23,4 +23,14 @@ public class Autor {
 
     @OneToMany(mappedBy = "autor")
     private List<Libro> libros;
+
+    public String upperCaseFirst(){
+        String str = this.getNombre();
+        String firstLtr = str.substring(0, 1);
+        String restLtrs = str.substring(1, str.length());
+
+        firstLtr = firstLtr.toUpperCase();
+        str = firstLtr + restLtrs;
+        return str;
+    }
 }

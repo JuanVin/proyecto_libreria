@@ -21,7 +21,7 @@ public class LibroServiceImpl extends GenericServiceImpl<Libro, Long> implements
 
     @Override
     @Transactional
-    public boolean deleteById(long id) throws Exception {
+    public boolean deleteById(Long id) throws Exception {
         try {
             Optional<Libro> opt = libroRepository.findById(id);
             if(!opt.isEmpty()){
@@ -50,7 +50,18 @@ public class LibroServiceImpl extends GenericServiceImpl<Libro, Long> implements
 
     @Override
     @Transactional
-    public Libro findByIdAndActivo(long id) throws Exception{
+    public List<Libro> findAllByActivoAndCategory(Long id) throws Exception {
+        try{
+            List<Libro> entities = libroRepository.findAllByCategoryAndActivo(id);
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Libro findByIdAndActivo(Long id) throws Exception{
         try{
             Optional<Libro> entity= libroRepository.findByIDAndActivo(id);
 

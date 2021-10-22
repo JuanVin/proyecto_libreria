@@ -57,49 +57,47 @@ and open the template in the editor.
             <div class="row fantasia">
                 <div class="fant-cat">
                     <h1 class="text-dark">Fantasía</h1>
-                    <button type="button" class="btn btn-dark btn-fan">Ver todo</button>
+                    <a th:href="@{catalogo/fantasia}" class="btn btn-dark d-block mx-auto mt-1" role="button" >Ver todo</a>
                 </div>
                 <hr>
                 <div class="col text-center text-secondary" th:each="libro : ${fantasia}">
                     <strong><p class="mt-1" th:text="${libro.titulo}"></p></strong>
-                    <div class="cont-img">
-                        <img th:src="@{${libro.rutaImg}}" class="rounded border border-secondary border-3" alt="...">
-                         <p class="figcaption text-light" th:text="${libro.descripcion}"></p>
-                    </div>
-                    <a th:href="@{'/catalogo/buy/'+${libro.id}}" class="btn btn-dark d-block mx-auto mt-1" role="button"  th:text="'$'+${libro.precio}"></a>
+                    <a th:href="@{'/catalogo/buy/'+${libro.id}}" class="mx-auto" role="button" >
+                        <div class="cont-img">
+                            <img th:src="@{${libro.photosImagePath}}" class="rounded border border-secondary border-3 mt-2" alt="...">
+                        </div>
+                    </a>
                 </div>
             </div>
 
             <div class="row horror mt-2">
                 <div class="fant-cat">
                     <h1>Horror</h1>
-                    <button type="button" class="btn btn-dark btn-fan">Ver todo</button>
+                    <a th:href="@{catalogo/horror}" class="btn btn-dark d-block mx-auto mt-1" role="button" >Ver todo</a>
                 </div>
                 <hr>
                 <div class="col text-center" th:each="libro : ${horror}">
                     <strong><p class="mt-1" th:text="${libro.titulo}"></p></strong>
-                    <div class="cont-img">
-                        <img th:src="@{${libro.rutaImg}}" class="rounded border border-secondary border-3" alt="...">
-                        <p class="figcaption text-light" th:text="${libro.descripcion}"></p>
-                    </div>
-                    <a th:href="@{'/catalogo/buy/'+${libro.id}}" class="btn btn-dark mt-2 d-block mx-auto" role="button" aria-pressed="true" th:text="'$'+${libro.precio}"></a>
-                    <!--<button type="button" class="btn btn-dark mt-2 d-block mx-auto" th:text="'$'+${libro.precio}">Comprar</button>-->
+                    <a th:href="@{'/catalogo/buy/'+${libro.id}}" class="mx-auto" role="button" >
+                        <div class="cont-img">
+                            <img th:src="@{${libro.photosImagePath}}" class="rounded border border-secondary border-3 mt-2" alt="...">
+                        </div>
+                    </a> 
                 </div>
             </div>
             <div class="row horror mt-2">
                 <div class="fant-cat">
                     <h1>Comics</h1>
-                    <button type="button" class="btn btn-dark btn-fan">Ver todo</button>
+                    <a th:href="@{catalogo/comics}" class="btn btn-dark d-block mx-auto mt-1" role="button" >Ver todo</a>
                 </div>
                 <hr>
                 <div class="col text-center" th:each="libro : ${comic}">
                     <strong><p class="mt-1" th:text="${libro.titulo}"></p></strong>
-                    <div class="cont-img">
-                        <img th:src="@{${libro.rutaImg}}" class="rounded border border-secondary border-3" alt="...">
-                        <p class="figcaption text-light" th:text="${libro.descripcion}"></p>
-                    </div>
-
-                    <button type="button" class="btn btn-dark mt-2 d-block mx-auto" th:text="'$'+${libro.precio}">Comprar</button>
+                    <a th:href="@{'/catalogo/buy/'+${libro.id}}" class="mx-auto" role="button" >
+                        <div class="cont-img">
+                            <img th:src="@{${libro.photosImagePath}}" class="rounded border border-secondary border-3 mt-2" alt="...">
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="img-top">

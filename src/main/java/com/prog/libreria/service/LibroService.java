@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public interface LibroService extends GenericService<Libro, Long> {
-    public Libro findByIdAndActivo(long id) throws Exception;
+    public Libro findByIdAndActivo(Long id) throws Exception;
     public List<Libro> findAllByActivo() throws Exception;
+    public List<Libro> findAllByActivoAndCategory(Long id) throws  Exception;
 }
