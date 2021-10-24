@@ -38,7 +38,7 @@ html, body {
 .articulo img{
     width: 80%;
     height: auto;
-    max-height: 730px;
+    max-height: 700px;
 }
 .shadow-img{
     -webkit-box-shadow: 2px 6px 15px 9px #5B5B5B;

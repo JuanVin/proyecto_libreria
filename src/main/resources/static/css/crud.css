@@ -18,3 +18,18 @@ html, body {
 .action{
     margin-top: 100px;
 }
+.img-bottom{
+    position: absolute;
+    right: 0px;
+    top: 70px;
+}
+.img-bottom img{
+    width: 450px;
+    height: auto;
+
+}
+.row-width{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}

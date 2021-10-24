@@ -1,7 +1,6 @@
 package com.prog.libreria.controller;
 
 import com.prog.libreria.config.FileUploadUtil;
-import com.prog.libreria.entities.Autor;
 import com.prog.libreria.entities.Categoria;
 import com.prog.libreria.entities.Libro;
 import com.prog.libreria.service.AutorService;
@@ -10,11 +9,11 @@ import com.prog.libreria.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -105,7 +104,7 @@ public class LibroController {
                 model.addAttribute("libro", new Libro());
                 model.addAttribute("accion", "Agregar libro");
             }else{
-                model.addAttribute("libro", libroService.findByIdAndActivo(id));
+                model.addAttribute("libro", libroService.get(id));
                 model.addAttribute("accion", "Actualizar libro");
             }
             return "crud";
@@ -118,11 +117,15 @@ public class LibroController {
                                  @RequestParam("archivo") MultipartFile multipartFile,
                                  Model model, @PathVariable("id") Long id) throws Exception {
         try{
+
+            String imageName ="";
             Libro savedBook;
-            String fileName ="";
             if(!multipartFile.isEmpty()){
-                fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-                libro.setRutaImg(fileName);
+                //fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+                int index = multipartFile.getOriginalFilename().indexOf(".");
+                String extension = "." + multipartFile.getOriginalFilename().substring(index + 1);
+                imageName = Calendar.getInstance().getTimeInMillis() + extension;
+                libro.setRutaImg(imageName);
             }
             System.out.println(libro.getPrecio() + libro.getTitulo());
             if(id == 0){
@@ -132,7 +135,7 @@ public class LibroController {
             }
             if(!multipartFile.isEmpty()){
                 String uploadDir = "book-photos/" + savedBook.getId();
-                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+                FileUploadUtil.saveFile(uploadDir, imageName, multipartFile);
             }
 
             return "redirect:/";
@@ -140,4 +143,27 @@ public class LibroController {
             throw new Exception(e.getMessage());
         }
     }
+    @GetMapping("/book/list")
+    public String bookActions(Model model) throws Exception {
+        try{
+            List<Libro> libros = libroService.getAll();
+            model.addAttribute("libros", libros);
+            model.addAttribute("categoria", "Libros/Comics");
+            return "catalogue-list";
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    @GetMapping("/delete/book/{id}")
+    public String deleteBook(Model model, @PathVariable("id") Long id) throws Exception {
+        try{
+            Libro libro = libroService.get(id);
+            libro.setActivo(!libro.getActivo());
+            libroService.save(libro);
+            return "redirect:/book/list";
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }

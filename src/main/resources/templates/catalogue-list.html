@@ -35,7 +35,7 @@
                             Dropdown
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" th:href="@{/form/book/0}">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -54,31 +54,47 @@
             </div>
         </div>
     </nav>
+
     <div class="category">
         <h1 th:text="${categoria}"></h1>
     </div>
-
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Titulo</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Detalles</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="libro : ${libros}">
-            <th scope="row" th:text="${libro.id}"></th>
-            <td th:text="${libro.titulo}">Mark</td>
-            <td th:text="${libro.cantidad}">Otto</td>
-            <td th:text="${libro.autor.nombre}">@mdo</td>
-            <td><a th:href="@{'/catalogo/buy/'+${libro.id}}" class="btn btn-secondary d-block mx-auto mt-1"
-                   role="button">Detalles</a></td>
-        </tr>
-        </tbody>
-    </table>
+    <div th:if="${libros.size}">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Autor</th>
+                <div th:if="${categoria != 'Libros/Comics'}">
+                    <th scope="col">Detalles</th>
+                </div>
+                <div th:unless="${categoria != 'Libros/Comics'}">
+                    <th scope="col">Editar</th>
+                    <th scope="col">Borrar</th>
+                </div>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="libro : ${libros}" th:classappend="${libro.activo} ? table : table-danger">
+                <th scope="row" th:text="${libro.id}"></th>
+                <td th:text="${libro.titulo}">Mark</td>
+                <td th:text="${libro.cantidad}">Otto</td>
+                <td th:text="${libro.autor.nombre}">@mdo</td>
+                <div th:if="${categoria != 'Libros/Comics'}">
+                    <td><a th:href="@{'/catalogo/buy/'+${libro.id}}" class="btn btn-secondary d-block mx-auto mt-1"
+                           role="button">Detalles</a></td>
+                </div>
+                <div th:unless="${categoria != 'Libros/Comics'}">
+                    <td><a th:href="@{'/form/book/'+${libro.id}}" class="btn btn-secondary d-block mx-auto mt-1"
+                           role="button">Editar</a></td>
+                    <td><a th:if="${libro.activo}" th:href="@{'/delete/book/'+${libro.id}}" class="btn btn-secondary d-block mx-auto mt-1"
+                           role="button">Borrar</a></td>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <footer class="page-footer font-small mt-5 shadow-lg bg-secondary rounded">
         <div class="footer-copyright text-center py-3 ">© 2020 Copyright:

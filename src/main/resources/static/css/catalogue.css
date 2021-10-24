@@ -29,8 +29,8 @@ html, body {
 }
 
 .fantasia img{
-    width: auto;
-    z-index: 50;
+    width: 250px;
+    height: auto;
     max-height: 400px;
 }
 
@@ -42,9 +42,9 @@ html, body {
 }
 
 .horror img{
-    width: auto;
+    width: 250px;
+    height: auto;
     max-height: 400px;
-
 }
 
 hr{
